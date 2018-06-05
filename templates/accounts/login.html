@@ -1,0 +1,37 @@
+{% extends "cms/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}ログイン{% endblock title %}
+
+{% block content %}
+
+<!--{% if form.errors  %}-->
+  <!--<div class="alert alert-danger" role="alert">-->
+    <!--<p>ユーザーIDかパスワードが異なります。もう一度ログインしてください。</p>-->
+  <!--</div>-->
+<!--{% endif %}-->
+
+<div class="panel panel-primary">
+  <div class="panel-heading" style="padding:20px;">
+    <h3 class="panel-title text-center">ログイン</h3>
+  </div>
+  <div class="panel-body">
+    <form action="{% url 'login' %}" method="post" role="form">
+      {% csrf_token %}
+      {% bootstrap_form form layout='horizontal' %}
+      <!--<div class="input-group" style="margin-bottom:10px">-->
+        <!--<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>-->
+        <!--<input id="id_username" name="username" type="text" value="" maxlength="256" placeholder="ユーザーID" aria-describedby="sizing-addon1" autofocus required/>-->
+      <!--</div>-->
+      <!--<div class="input-group" style="margin-bottom:10px">-->
+        <!--<span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>-->
+        <!--<input id="id_password" name="password" type="password" value="" maxlength="256" placeholder="パスワード" aria-describedby="sizing-addon1" required/>-->
+      <!--</div>-->
+
+      <button type="submit" style="margin-bottom:-20px" class="btn btn-primary"><i class="fa fa-sign-in">Login</i></button>
+      <input name="next" type="hidden" value="{{ next }}"/>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

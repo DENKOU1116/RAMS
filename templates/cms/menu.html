@@ -1,0 +1,15 @@
+{% extends "cms/base.html" %}
+{% load bootstrap4 %}
+.
+{% block title %}メニュー{% endblock title %}
+
+{% block content %}
+    <br>
+    <h4 class="mt-4 mb-5 border-bottom">メニュー</h4>
+    <a href="{% url 'cms:asset_list' %}" class="btn btn-primary">資産</a>
+    <a href="{% url 'cms:warehouse_list' %}" class="btn btn-secondary">倉庫</a>
+    <a href="{% url 'cms:index' %}" class="btn btn-primary">地図情報</a>
+    <a href="{% url 'cms:food_list' %}" class="btn btn-secondary">食材表</a>
+    <a href="{% url 'cms:user_search' %}" class="btn btn-primary">ユーザー情報</a>
+
+{% endblock content %}

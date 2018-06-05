@@ -1,0 +1,17 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}ユーザー情報{% endblock title %}
+
+{% block content %}
+  <br><br><br>
+  <form method="get">
+      {{ filter.form.as_p }}
+    <button type="submit" class="btn btn-primary btn-sm">検索</button>
+  </form>
+  <ul>
+  {% for user in filter.qs %}
+    <li>{{ user.username }} - {{ user.get_full_name }}</li>
+  {% endfor %}
+  </ul>
+  <a href="{% url 'cms:menu' %}" class="btn btn-secondary">戻る</a>
+{% endblock %}

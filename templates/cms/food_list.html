@@ -1,0 +1,16 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}食材表{% endblock title %}
+
+{% block content %}
+  <form method="get">
+      {{ filter.form.as_p }}
+      <button type="submit" class="btn btn-secondary btn-sm">検索</button>
+  </form>
+  <ul>
+    {% for food in filter.qs %}
+      <li>{{ food.kind.name }} , {{ food.name }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'cms:menu' %}" class="btn btn-secondary">戻る</a>
+{% endblock %}

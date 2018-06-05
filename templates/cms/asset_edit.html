@@ -1,0 +1,23 @@
+{% extends "cms/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}資産の編集{% endblock title %}
+
+{% block content %}
+  <h4 class="mt-4 mb-5 border-bottom">資産</h4>
+      {% csrf_token %}
+      {% bootstrap_form form layout='horizontal' %}
+      <div class="form-group row">
+        <div class="offset-md-3 col-md-9">
+          <button type="submit" class="btn btn-primary">保存</button>
+          {% if asset_id %}
+          <a href="{% url 'cms:asset_del' asset_id=asset_id %}" class="btn btn-secondary">削除</a>
+          <a href="{% url 'cms:asset_list' %}" class="btn btn-secondary">戻る</a>
+          {% else %}
+          <a href="{% url 'cms:asset_list' %}" class="btn btn-secondary">戻る</a>
+          {% endif %}
+          <a href="{% url 'logout' %}" class="btn btn-secondary btn-xs">ログアウト</a>
+        </div>
+      </div>
+    </form>
+{% endblock content %}

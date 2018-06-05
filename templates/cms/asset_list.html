@@ -1,0 +1,54 @@
+{% extends "cms/base.html" %}
+
+{% block title %}資産管理{% endblock title %}
+
+{% block content %}
+    <h4 class="mt-4 border-bottom">資産</h4>
+    {% if asset_id %}
+    <form action="{% url 'cms:asset_sea' %}" method="post">
+    {% csrf_token %}
+    {% else %}
+    <form action="{% url 'cms:asset_list' %}" method="post">
+    {% csrf_token %}
+    {% endif %}
+        <form action="" method="get" name="search_form" role="search">
+            <span>ID:</span>
+            <input type="search" id="asset_id" name="asset_id">{{ asset.id }}</input>
+            <span>名前:</span>
+            <input type="search" id="asset_Name" name="asset_Name">{{ asset.Name }}</input>
+            <span>倉庫:</span>
+            {% for warehouse in warehouses %}
+            <select id="warehouseName" name="warehouseName" tabindex="3">{{ asset.Warehouse }}</select>
+            {% endfor %}
+            <br><a href="{% url 'cms:asset_sea' %}" class="btn btn-primary btn-sm my-3">検索</a>
+        </form>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">名前</th>
+          <th scope="col">倉庫</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for asset in assets %}
+        <tr>
+          <td scope="row"><a href="{% url 'cms:asset_mod' asset_id=asset.id %}">{{ asset.id }}</a></td>
+          <td>{{ asset.Name }}</td>
+          <td>{{ asset.Warehouse }}</td>
+          <td>
+            <!--<a href="{% url 'cms:asset_del' asset_id=asset.id %}" class="btn btn-outline-danger btn-sm">削除</a>-->
+            <a href="{% url 'cms:warehouse_list' %}" class="btn btn-outline-info btn-sm">倉庫一覧</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'cms:asset_add' %}" class="btn btn-primary btn-sm my-3">追加</a>
+            {% csrf_token %}
+    <a href="{% url 'cms:csv_export' %}" methods="POST" class="btn btn-primary btn-sm my-3">CSV</a>
+            {% csrf_token %}
+    <a href="{% url 'cms:menu' %}" methods="POST" class="btn btn-primary btn-sm my-3">メニューへ戻る</a>
+            {% csrf_token %}
+{% endblock content %}
